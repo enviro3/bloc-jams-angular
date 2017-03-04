@@ -4,7 +4,7 @@
   "description": "Starter project for the Bloc Frontend Web Development",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bloc/bloc-frontend-project-starter"
+    "url": "git+https://github.com/bloc/bloc-frontend-project-starter.git"
   },
   "main": "server.js",
   "scripts": {
@@ -25,5 +25,13 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-hapi": "^0.8.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/bloc/bloc-frontend-project-starter/issues"
+  },
+  "homepage": "https://github.com/bloc/bloc-frontend-project-starter#readme",
+  "keywords": [
+    "angular",
+    "bloc-jams"
+  ]
 }
