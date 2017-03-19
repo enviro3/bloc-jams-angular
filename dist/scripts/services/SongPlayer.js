@@ -1,6 +1,7 @@
 (function() {
-    function SongPlayer() {
+    function SongPlayer(Fixtures) {
         var SongPlayer = {};
+        var currentAlbum = Fixtures.getAlbum();
         
         /**
         * @desc Buzz object audio file
@@ -36,7 +37,19 @@
             SongPlayer.currentSong = song;
         };
         
-         SongPlayer.currentSong = null;
+         /**
+        * @function getSongIndex
+        * @desc gets index of currently playing song
+        */
+        var getSongIndex = function(song) {
+        return currentAlbum.songs.indexOf(song);
+        };
+        
+        /**
+        * @desc Active song object from list of songs
+        * @type {Object}
+        */ 
+        SongPlayer.currentSong = null;
         
         /**
         * @function SongPlayer.play
@@ -50,7 +63,7 @@
                 playSong(song);
             } else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
-                    currentBuzzObject.play();
+                    playSong(song);
                 }
             }
         };
@@ -64,13 +77,28 @@
             song = song || SongPlayer.currentSong;
             currentBuzzObject.pause();
             song.playing = false;
-        }
+        };
+        
+         /**
+        * @function SongPlayer.previous
+        * @desc allows player bar to go to previous index and therefore song 
+        */
+        SongPlayer.previous = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex--;
             
-            
+            if (currentSongIndex < 0) {
+                currentBuzzObject.stop();
+                SongPlayer.currentSong.playing = null;
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
+        };
         return SongPlayer;
     };
- 
      angular
          .module('blocJams')
-         .factory('SongPlayer', SongPlayer);
+         .factory('SongPlayer',['Fixtures', SongPlayer]);
  })();

@@ -34,10 +34,10 @@
         Fixtures.getAlbum = function() {
             return albumPicasso;
      };
-        Fixtures.getCollection = function(numberOfAlbums) {
+        Fixtures.getCollection = function(albumList) {
             var newAlbumPicasso = [];
-            for(var i = 0; i < numberOfAlbums; i++){
-                newAlbumPicasso.push(albumPicasso); 
+            for(var i = 0; i < albumList; i++){
+                newAlbumPicasso.push(angular.copy(albumPicasso)); 
         
             }
             return newAlbumPicasso;
