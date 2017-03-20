@@ -28,18 +28,18 @@
         * @desc Stops currently playing song and loads new audio file as currentBuzzObject
         * @param {Object} song
         */
-        var setSong = function(song){
+        var setSong = function(futureSong){
             if (currentBuzzObject){
-                stopSong(song);
+                stopSong(SongPlayer.currentSong);
             }
             
-            currentBuzzObject = new buzz.sound(song.audioUrl, {
+            currentBuzzObject = new buzz.sound(futureSong.audioUrl, {
                 formats: ['mp3'],
                 preload: true
                 
             });
             
-            SongPlayer.currentSong = song;
+            SongPlayer.currentSong = futureSong;
         };
         
          /**
@@ -47,7 +47,7 @@
         * @desc gets index of currently playing song
         */
         var getSongIndex = function(song) {
-        return currentAlbum.songs.indexOf(song);
+            return currentAlbum.songs.indexOf(song);
         };
         
         /**
@@ -91,9 +91,8 @@
         SongPlayer.previous = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
-            
             if (currentSongIndex < 0) {
-                stopSong(song);
+                stopSong(SongPlayer.currentSong);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
@@ -104,9 +103,8 @@
         SongPlayer.next = function(){
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
-            
-            if(currentSongIndex < currentAlbum.songs){
-                stopSong(song);
+            if(currentSongIndex >= currentAlbum.songs.length){
+                stopSong(SongPlayer.currentSong);
             }else{
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
