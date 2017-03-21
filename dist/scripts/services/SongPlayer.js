@@ -62,6 +62,7 @@
         * @param {Object} song
         */
         SongPlayer.play = function(song) {
+            debugger;
             song = song || SongPlayer.currentSong;
             if(SongPlayer.currentSong !== song){
                 setSong(song);

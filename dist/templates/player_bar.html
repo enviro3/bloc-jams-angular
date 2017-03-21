@@ -19,7 +19,7 @@
              </a>
          </div>
          <div class="control-group currently-playing">
-             <h2 class="song-name">{{album.songPlayer.currentSong}}</h2>
+             <h2 class="song-name">{{album.songPlayer.currentSong.title}}</h2>
              <h2 class="artist-song-mobile"></h2>
              <h3 class="artist-name">{{album.albumData.artist}}</h3>
              <div class="seek-control">
@@ -28,7 +28,7 @@
                      <div class="thumb"></div>
                  </div>
                  <div class="current-time"></div>
-                 <div class="total-time">{{album.albumData.artist}}</div>
+                 <div class="total-time">{{album.songPlayer.currentSong.duration}}</div>
              </div>
          </div>
          <div class="control-group volume">
