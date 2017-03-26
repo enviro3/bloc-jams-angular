@@ -43,7 +43,6 @@
                     SongPlayer.currentTime = currentBuzzObject.getTime();
             });
         });
-            
             SongPlayer.currentSong = futureSong;
         };
         
@@ -62,9 +61,10 @@
         SongPlayer.currentSong = null;
         
         /**
-        * @desc volume control
+        * @desc volume control. This is the initial volume of the application that is set when the page is first loaded. It updates when the volume slider bar is changed and gets updated by the function setVolume.  
         * @type {Number}
         */ 
+        
         SongPlayer.volume = 80;
         
         /**
@@ -143,6 +143,7 @@
         SongPlayer.setVolume = function(currentVolume){
             if (currentBuzzObject !== null){
                 currentBuzzObject.setVolume(currentVolume); 
+                SongPlayer.volume = currentVolume;
             }   
         }
         return SongPlayer;
