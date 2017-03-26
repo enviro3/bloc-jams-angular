@@ -35,9 +35,9 @@
             
             currentBuzzObject = new buzz.sound(futureSong.audioUrl, {
                 formats: ['mp3'],
-                preload: true    
+                preload: true
             });
-            
+            currentBuzzObject.setVolume(SongPlayer.volume);
             currentBuzzObject.bind('timeupdate', function() {
                 $rootScope.$apply(function() {
                     SongPlayer.currentTime = currentBuzzObject.getTime();
@@ -60,6 +60,13 @@
         * @type {Object}
         */ 
         SongPlayer.currentSong = null;
+        
+        /**
+        * @desc volume control
+        * @type {Number}
+        */ 
+        SongPlayer.volume = 80;
+        
         /**
         *@desc Current playback time (in seconds) of currently playing song
         *@type {Number}
@@ -128,10 +135,16 @@
         * @param {Number} time
         */
         SongPlayer.setCurrentTime = function(time){
-            if (currentBuzzObject) {
+            if (currentBuzzObject !== null) {
                 currentBuzzObject.setTime(time);
             }
         };
+        
+        SongPlayer.setVolume = function(currentVolume){
+            if (currentBuzzObject !== null){
+                currentBuzzObject.setVolume(currentVolume); 
+            }   
+        }
         return SongPlayer;
     };
      angular
