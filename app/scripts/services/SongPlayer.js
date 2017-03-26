@@ -35,15 +35,14 @@
             
             currentBuzzObject = new buzz.sound(futureSong.audioUrl, {
                 formats: ['mp3'],
-                preload: true    
+                preload: true
             });
-            
+            currentBuzzObject.setVolume(SongPlayer.volume);
             currentBuzzObject.bind('timeupdate', function() {
                 $rootScope.$apply(function() {
                     SongPlayer.currentTime = currentBuzzObject.getTime();
             });
         });
-            
             SongPlayer.currentSong = futureSong;
         };
         
@@ -60,6 +59,14 @@
         * @type {Object}
         */ 
         SongPlayer.currentSong = null;
+        
+        /**
+        * @desc volume control. This is the initial volume of the application that is set when the page is first loaded. It updates when the volume slider bar is changed and gets updated by the function setVolume.  
+        * @type {Number}
+        */ 
+        
+        SongPlayer.volume = 80;
+        
         /**
         *@desc Current playback time (in seconds) of currently playing song
         *@type {Number}
@@ -128,10 +135,17 @@
         * @param {Number} time
         */
         SongPlayer.setCurrentTime = function(time){
-            if (currentBuzzObject) {
+            if (currentBuzzObject !== null) {
                 currentBuzzObject.setTime(time);
             }
         };
+        
+        SongPlayer.setVolume = function(currentVolume){
+            if (currentBuzzObject !== null){
+                currentBuzzObject.setVolume(currentVolume); 
+                SongPlayer.volume = currentVolume;
+            }   
+        }
         return SongPlayer;
     };
      angular
